@@ -3,8 +3,11 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import numpy as np
+from numpy.random import randn
 import pandas as pd
 from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
+from matplotlib import rcParams
 
 
 def print_hi(name):
@@ -29,12 +32,13 @@ if __name__ == '__main__':
     DF_obj2.loc[3:5, 0] = None
     DF_obj2.loc[1:4, 5] = None
     print(DF_obj)
-    print('*************************************************')
+    print('=================================================')
     print(DF_obj2)
     print(DF_obj.loc[['row 2', 'row 5'], ['column 5', 'column 2']])
 
     print(series_obj['row3':'row7'])
 
+    print('*************************************************')
     print(DF_obj < .2)
     print(series_obj[series_obj > 6])
     series_obj['row1', 'row5', 'row8'] = 8
@@ -51,6 +55,7 @@ if __name__ == '__main__':
     print(DF_obj1_missing_fill)
     DF_obj1_missing_fill = DF_obj1.fillna(method='ffill')  # fill the missing value with last not null value element
     print(DF_obj1_missing_fill)
+    print('------------------------------')
     print(DF_obj2)
     print('------------------------------')
     print(DF_obj2.isnull().sum())
@@ -108,4 +113,36 @@ if __name__ == '__main__':
     dataFameSorted = dataFrameObject5.sort_values(by=5, ascending=False)
     print('------------------------------')
     print(dataFameSorted)
+    address = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
+              '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/mtcars.csv'
+    cars = pd.read_csv(address)
+    cars.columns = ['Car_Names', 'MPG', 'Cyl', 'Disp', 'HP', 'Drat', 'WT', 'QSec', 'VS', 'AM', 'Gear', 'Crab']
+    print(cars.head())
+    carsGroupsCyl = cars.groupby(cars['Cyl'])
+    carsGroupsAM = cars.groupby(cars['AM'])
+    print(carsGroupsCyl.mean())
+    print(carsGroupsAM.mean())
+    print(cars.all())
+    x = range(1, 10)
+    y = [1, 2, 3, 4, 0, 4, 3, 2, 1]
+    z = [1, 2, 3, 4, 0.5]
+
+    # plt.plot(x, y)
+    # plt.show()
+    # plt.bar(x, y)
+    # plt.show()
+    # plt.pie(z)
+    # plt.savefig('E:/newTest/pie_chart.png')
+    # plt.show()
+    mpg = cars['MPG']
+    # mpg.plot()
+    # plt.show()
+    dataFramePlat1 = cars[['Cyl', 'WT', 'MPG']]
+    # dataFramePlat1.plot()
+    # plt.show()
+    # mpg.plot(kind='bar')
+    # plt.show()
+    # mpg.plot(kind='barh')
+    # plt.show()
+
     # See PyCharm help at https://www.jetbrains.com/help/pycharm/
