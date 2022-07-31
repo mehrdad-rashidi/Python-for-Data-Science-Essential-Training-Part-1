@@ -2,12 +2,17 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# import inline as inline
+# import matplotlib
 import numpy as np
-from numpy.random import randn
 import pandas as pd
+import seaborn
+import seaborn as sb
 from pandas import Series, DataFrame
+from numpy.random import randn
 import matplotlib.pyplot as plt
-from matplotlib import rcParams
+from pylab import rcParams
+from pandas.plotting import scatter_matrix
 
 
 def print_hi(name):
@@ -124,8 +129,16 @@ if __name__ == '__main__':
     print(carsGroupsAM.mean())
     print(cars.all())
     x = range(1, 10)
-    y = [1, 2, 3, 4, 0, 4, 3, 2, 1]
+    # y = [1, 2, 3, 4, 0, 4, 3, 2, 1]
+    y = [1, 2, 3, 4, 0.5, 4, 3, 2, 1]
+    x1 = range(0, 10)
+    y1 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
     z = [1, 2, 3, 4, 0.5]
+    wide = [.5, .5, .5, .9, .9, .9, .5, .5, .5]
+    # wide = [.1, .3, .5, .7, .9, .7, .5, .3, .1]
+    color = ['salmon']
+    colorThem = ['darkgray', 'lightsalmon', 'powderblue']
+    colorThemRGB = ['#A9A9A9', '#FFA07A', '#B0E0E6', '#FFE4C4', '#BDB76B']
 
     # plt.plot(x, y)
     # plt.show()
@@ -134,7 +147,7 @@ if __name__ == '__main__':
     # plt.pie(z)
     # plt.savefig('E:/newTest/pie_chart.png')
     # plt.show()
-    mpg = cars['MPG']
+    # mpg = cars['MPG']
     # mpg.plot()
     # plt.show()
     dataFramePlat1 = cars[['Cyl', 'WT', 'MPG']]
@@ -144,5 +157,88 @@ if __name__ == '__main__':
     # plt.show()
     # mpg.plot(kind='barh')
     # plt.show()
+
+    rcParams['figure.figsize'] = 5, 4
+    fig = plt.figure()
+    ax = fig.add_axes([.1, .1, 1, 1])
+    # ax.set_xlim([1, 9])
+    # ax.set_ylim([0, 5])
+    # ax.set_xticks([0, 1, 2, 4, 5, 6, 8, 9, 10])
+    # ax.set_yticks([0, 1, 2, 3, 4, 5])
+    # ax.grid()
+    # ax.plot(x, y)
+    # plt.show()
+    # fig, (ax1, ax2) = plt.subplots(1, 2)
+    # ax1.plot(x)
+    # ax2.plot(x, y)
+    # plt.show()
+    # plt.bar(x, y, color=color, width=wide, align='center')
+    # plt.show()
+    # dataFramePlat1.plot(color=colorThem)
+    # plt.show()
+    # plt.pie(z, colors=colorThemRGB)
+    # plt.show()
+    # plt.plot(x, y, ds='steps', lw=5)
+    # plt.plot(x1, y1, ls='--', lw=10)
+    # plt.plot(x, y, marker='1', mew=20)
+    # plt.plot(x1, y1, marker='+', mew=15)
+    # plt.show()
+    # plt.bar(x, y)
+    # plt.xlabel('Your x-axis label')
+    # plt.ylabel('Your y-axis label')
+    # plt.show()
+    # vehicleType = ['Bicycle', 'Motorbike', 'Car', 'Van', 'Stroller']
+    # plt.pie(z, labels=vehicleType)
+    # plt.legend(vehicleType, loc='best')
+    # plt.show()
+    # mpgCars = cars.MPG
+    # mpgCars.plot()
+    # ax.set_xticks(range(32))
+    # ax.set_xticklabels(cars.Car_Names, rotation=60, fontsize='medium')
+    # ax.set_title('Miles per Gallon of Cars in mtCars Dataset')
+    # ax.set_xlabel('Car Names')
+    # ax.set_ylabel('Miles / Gal')
+    # ax.legend(loc='best')
+    # ax.set_ylim([0, 45])
+    # ax.annotate('Toyota Corolla', xy=(19, 33.9), xytext=(21, 35), arrowprops=dict(facecolor='black', shrink=0.05))
+    # plt.show()
+    # print(mpgCars.max())
+    # plt.savefig('E:/newTest/pie_chart.png')
+    addressTime = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
+                  '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/Superstore-Sales.csv'
+    dataFrameTime = pd.read_csv(addressTime, index_col='Order Date', encoding='cp1252', parse_dates=True)
+    pd.set_option('display.max_columns', None)
+    print(dataFrameTime.head())
+    # dataFrameTime['Order Quantity'].plot()
+    # plt.show()
+    dataFrameTimeSample = dataFrameTime.sample(n=100, random_state=25, axis=0)
+    dataFrameSubsetCars = cars[['MPG', 'Disp', 'HP', 'WT']]
+    # plt.xlabel('Order Date')
+    # plt.ylabel('Order Quantity')
+    # plt.title('Superstore Sales')
+    # dataFrameTimeSample['Order Quantity'].plot()
+    # plt.show()
+    # print(dataFrameTime.columns.tolist())
+    sb.set_style('whitegrid')
+    cars.index = cars.Car_Names
+    mpg = cars['MPG']
+    # mpg.plot(kind='hist')
+    # plt.show()
+    # plt.hist(mpg)
+    # plt.plot()
+    # plt.show()
+    # sb.displot(mpg)
+    # plt.show()
+    # cars.plot(kind='scatter', x='HP', y='MPG', c=['darkgray'], s=150)
+    # plt.show()
+    # sb.regplot(x='HP', y='MPG', data=cars, scatter=True)
+    # sb.pairplot(cars)
+    # sb.pairplot(dataFrameSubsetCars)
+    # plt.show()
+    # cars.boxplot(column='MPG', by='AM')
+    # cars.boxplot(column='WT', by='AM')
+    # plt.show()
+    sb.boxplot(x='AM', y='MPG', data=cars, palette='hls')
+    plt.show()
 
     # See PyCharm help at https://www.jetbrains.com/help/pycharm/
