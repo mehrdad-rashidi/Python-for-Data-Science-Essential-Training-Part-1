@@ -7,10 +7,12 @@
 import numpy as np
 import pandas as pd
 import seaborn
+import scipy
 import seaborn as sb
+import matplotlib.pyplot as plt
+from scipy import stats
 from pandas import Series, DataFrame
 from numpy.random import randn
-import matplotlib.pyplot as plt
 from pylab import rcParams
 from pandas.plotting import scatter_matrix
 
@@ -122,12 +124,12 @@ if __name__ == '__main__':
               '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/mtcars.csv'
     cars = pd.read_csv(address)
     cars.columns = ['Car_Names', 'MPG', 'Cyl', 'Disp', 'HP', 'Drat', 'WT', 'QSec', 'VS', 'AM', 'Gear', 'Crab']
-    print(cars.head())
-    carsGroupsCyl = cars.groupby(cars['Cyl'])
-    carsGroupsAM = cars.groupby(cars['AM'])
-    print(carsGroupsCyl.mean())
-    print(carsGroupsAM.mean())
-    print(cars.all())
+    # print(cars.head())
+    # carsGroupsCyl = cars.groupby(cars['Cyl'])
+    # carsGroupsAM = cars.groupby(cars['AM'])
+    # print(carsGroupsCyl.mean())
+    # print(carsGroupsAM.mean())
+    # print(cars.all())
     x = range(1, 10)
     # y = [1, 2, 3, 4, 0, 4, 3, 2, 1]
     y = [1, 2, 3, 4, 0.5, 4, 3, 2, 1]
@@ -150,7 +152,7 @@ if __name__ == '__main__':
     # mpg = cars['MPG']
     # mpg.plot()
     # plt.show()
-    dataFramePlat1 = cars[['Cyl', 'WT', 'MPG']]
+    # dataFramePlat1 = cars[['Cyl', 'WT', 'MPG']]
     # dataFramePlat1.plot()
     # plt.show()
     # mpg.plot(kind='bar')
@@ -204,23 +206,23 @@ if __name__ == '__main__':
     # plt.show()
     # print(mpgCars.max())
     # plt.savefig('E:/newTest/pie_chart.png')
-    addressTime = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
-                  '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/Superstore-Sales.csv'
-    dataFrameTime = pd.read_csv(addressTime, index_col='Order Date', encoding='cp1252', parse_dates=True)
-    pd.set_option('display.max_columns', None)
-    print(dataFrameTime.head())
+    # addressTime = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
+    #               '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/Superstore-Sales.csv'
+    # dataFrameTime = pd.read_csv(addressTime, index_col='Order Date', encoding='cp1252', parse_dates=True)
+    # pd.set_option('display.max_columns', None)
+    # print(dataFrameTime.head())
     # dataFrameTime['Order Quantity'].plot()
     # plt.show()
-    dataFrameTimeSample = dataFrameTime.sample(n=100, random_state=25, axis=0)
-    dataFrameSubsetCars = cars[['MPG', 'Disp', 'HP', 'WT']]
+    # dataFrameTimeSample = dataFrameTime.sample(n=100, random_state=25, axis=0)
+    # dataFrameSubsetCars = cars[['MPG', 'Disp', 'HP', 'WT']]
     # plt.xlabel('Order Date')
     # plt.ylabel('Order Quantity')
     # plt.title('Superstore Sales')
     # dataFrameTimeSample['Order Quantity'].plot()
     # plt.show()
     # print(dataFrameTime.columns.tolist())
-    sb.set_style('whitegrid')
-    cars.index = cars.Car_Names
+    # sb.set_style('whitegrid')
+    # cars.index = cars.Car_Names
     mpg = cars['MPG']
     # mpg.plot(kind='hist')
     # plt.show()
@@ -238,7 +240,36 @@ if __name__ == '__main__':
     # cars.boxplot(column='MPG', by='AM')
     # cars.boxplot(column='WT', by='AM')
     # plt.show()
-    sb.boxplot(x='AM', y='MPG', data=cars, palette='hls')
-    plt.show()
+    # sb.boxplot(x='AM', y='MPG', data=cars, palette='hls')
+    # plt.show()
+    np.set_printoptions(precision=2)
+    a = np.array([1, 2, 3, 4, 5, 6])
+    b = np.array([[10, 20, 20], [40, 50, 60]])
+    print(b)
+    np.random.seed(25)
+    c = 6 * np.random.randn(6)
+    print(c)
+    d = np.arange(1, 35)
+    print(d)
+    print(a * 10)
+    print(c + a)
+    print(c - a)
+    print(c * a)
+    print(c / a)
+    aa = np.array([[2., 4., 6.], [1., 3., 5.], [10, 20, 30]])
+    bb = np.array([[0., 1., 2.], [3., 4., 5.], [6., 7., 8.]])
+    print(aa * bb)
+    print(np.dot(aa, bb))
+    print(cars.sum())
+    print(cars.sum(axis=1))
+    print(cars.median())
+    print(cars.mean())
+    print(cars.max())
+    print(mpg.idxmax())
+    print(cars.std())
+    print(cars.var())
+    gear = cars.Gear
+    print(gear.value_counts())
+    print(cars.describe())
 
     # See PyCharm help at https://www.jetbrains.com/help/pycharm/
