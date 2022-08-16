@@ -16,7 +16,6 @@ from numpy.random import randn
 from pylab import rcParams
 from pandas.plotting import scatter_matrix
 
-
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
@@ -120,16 +119,21 @@ if __name__ == '__main__':
     dataFameSorted = dataFrameObject5.sort_values(by=5, ascending=False)
     print('------------------------------')
     print(dataFameSorted)
-    address = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
-              '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/mtcars.csv'
-    cars = pd.read_csv(address)
+    # address = 'D:/Linkedin Learning/Python for Data Science Essential Training Part ' \
+    #           '1/Ex_Files_Python_Data_Science_EssT_Pt_1/Exercise Files/Data/mtcars.csv'
+    # address = 'mtcars.csv'
+    # cars = pd.read_csv(address)
+    cars = pd.read_csv('mtcars.csv')
     cars.columns = ['Car_Names', 'MPG', 'Cyl', 'Disp', 'HP', 'Drat', 'WT', 'QSec', 'VS', 'AM', 'Gear', 'Crab']
-    # print(cars.head())
-    # carsGroupsCyl = cars.groupby(cars['Cyl'])
-    # carsGroupsAM = cars.groupby(cars['AM'])
-    # print(carsGroupsCyl.mean())
-    # print(carsGroupsAM.mean())
-    # print(cars.all())
+    cars.index = cars.Car_Names
+    print('********************************++++++**********************')
+    print(cars.head(15))
+    print('********************************++++++**********************')
+    carsGroupsCyl = cars.groupby(cars['Cyl'])
+    carsGroupsAM = cars.groupby(cars['AM'])
+    print(carsGroupsCyl.mean())
+    print(carsGroupsAM.mean())
+    print(cars.all())
     x = range(1, 10)
     # y = [1, 2, 3, 4, 0, 4, 3, 2, 1]
     y = [1, 2, 3, 4, 0.5, 4, 3, 2, 1]
@@ -149,7 +153,7 @@ if __name__ == '__main__':
     # plt.pie(z)
     # plt.savefig('E:/newTest/pie_chart.png')
     # plt.show()
-    # mpg = cars['MPG']
+    mpg = cars['MPG']
     # mpg.plot()
     # plt.show()
     # dataFramePlat1 = cars[['Cyl', 'WT', 'MPG']]
@@ -193,7 +197,7 @@ if __name__ == '__main__':
     # plt.pie(z, labels=vehicleType)
     # plt.legend(vehicleType, loc='best')
     # plt.show()
-    # mpgCars = cars.MPG
+    mpgCars = cars.MPG
     # mpgCars.plot()
     # ax.set_xticks(range(32))
     # ax.set_xticklabels(cars.Car_Names, rotation=60, fontsize='medium')
@@ -223,7 +227,7 @@ if __name__ == '__main__':
     # print(dataFrameTime.columns.tolist())
     # sb.set_style('whitegrid')
     # cars.index = cars.Car_Names
-    mpg = cars['MPG']
+    # mpg = cars['MPG']
     # mpg.plot(kind='hist')
     # plt.show()
     # plt.hist(mpg)
@@ -271,5 +275,15 @@ if __name__ == '__main__':
     gear = cars.Gear
     print(gear.value_counts())
     print(cars.describe())
+    crab = cars.Crab
+    print(crab.value_counts())
+    carsCat = cars[['Cyl', 'VS', 'AM', 'Gear', 'Crab']]
+    print(carsCat.head())
+    gearsGroup = carsCat.groupby('Gear')
+    print(gearsGroup.describe())
+    cars['Groups'] = pd.Series(cars.Gear, dtype='category')
+    print(cars['Groups'])
+    print(cars['Groups'].value_counts())
+    print(pd.crosstab(cars['AM'], cars['Gear']))
 
     # See PyCharm help at https://www.jetbrains.com/help/pycharm/
